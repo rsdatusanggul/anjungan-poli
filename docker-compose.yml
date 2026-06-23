@@ -1,0 +1,71 @@
+services:
+  db:
+    image: mariadb:11.4
+    container_name: anjungan-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: anjungan_db
+      MYSQL_USER: anjungan_user
+      MYSQL_PASSWORD: anjungan_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - anjungan-network
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: anjungan-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - anjungan-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: anjungan-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./backend/.env
+    environment:
+      - ANJUNGAN_DB_HOST=db
+      - REDIS_HOST=redis
+    depends_on:
+      - db
+      - redis
+    networks:
+      - anjungan-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: anjungan-frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - BACKEND_API_URL=http://backend:8080/api/v1
+      - BACKEND_API_TOKEN=${BACKEND_API_TOKEN}
+    depends_on:
+      - backend
+    networks:
+      - anjungan-network
+
+volumes:
+  mariadb_data:
+  redis_data:
+
+networks:
+  anjungan-network:
+    driver: bridge

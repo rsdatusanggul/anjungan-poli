@@ -1,0 +1,53 @@
+# Dependencies
+**/node_modules/
+**/bower_components/
+
+# Next.js Build Output
+**/build/
+**/dist/
+**/.next/
+**/out/
+
+# Go Build Output
+**/backend/backend
+**/backend/main
+**/backend/*.exe
+**/backend/*.test
+**/backend/*.prof
+
+# Environment Variables (SANGAT PENTING: Mencegah kebocoran token & password)
+**/.env
+**/.env.local
+**/.env.production
+**/.env.development
+**/.env.production.local
+**/.env.development.local
+# File template boleh di-push ke GitHub (hanya berisi placeholder, bukan nilai asli)
+!**/.env.example
+!**/.env.production.example
+
+# IDEs and Editors
+**/.idea/
+**/.vscode/
+**/*.suo
+**/*.ntvs*
+**/*.njsproj
+**/*.sln
+**/*.swp
+**/*.swo
+DOCS
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/.pnpm-debug.log*
+**/*.log
+
+# Local Temp/Scratch
+/scratch/
+/tmp/

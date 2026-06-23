@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+:root {
+  --font-sans: var(--font-inter), sans-serif;
+  --font-heading: var(--font-outfit), sans-serif;
+
+  /* Color Palette */
+  --bg-primary: #0A0F1E;
+  --bg-card: rgba(17, 24, 39, 0.7);
+  --accent-call: #3B82F6;
+  --accent-exam: #10B981;
+  --accent-next: #F59E0B;
+  --text-primary: #F9FAFB;
+  --text-muted: #9CA3AF;
+  --border: rgba(31, 41, 55, 0.6);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+}
+
+/* Glassmorphism card utility */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Pulse Glow Animation for Calling Number */
+@keyframes glowPulseBlue {
+
+  0%,
+  100% {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.4), 0 0 20px rgba(59, 130, 246, 0.2);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.15) inset;
+  }
+
+  50% {
+    text-shadow: 0 0 25px rgba(59, 130, 246, 0.8), 0 0 35px rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.3) inset;
+  }
+}
+
+@keyframes glowPulseGreen {
+
+  0%,
+  100% {
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.4), 0 0 20px rgba(16, 185, 129, 0.2);
+  }
+
+  50% {
+    text-shadow: 0 0 25px rgba(16, 185, 129, 0.8), 0 0 35px rgba(16, 185, 129, 0.5);
+  }
+}
+
+.glow-call {
+  animation: glowPulseBlue 2s infinite ease-in-out;
+}
+
+.glow-exam {
+  animation: glowPulseGreen 2s infinite ease-in-out;
+}
+
+/* Vertical marquee scroll up animation */
+@keyframes scrollUp {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-marquee-vertical {
+  animation: scrollUp 100s linear infinite;
+}
+
+.animate-marquee-vertical:hover {
+  animation-play-state: paused;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 15, 30, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(31, 41, 55, 0.8);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.5);
+}
